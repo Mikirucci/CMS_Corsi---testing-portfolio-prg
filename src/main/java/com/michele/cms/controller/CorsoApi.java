@@ -18,13 +18,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 /* ResponseCode:
 2xx — Successo
-
 200 — OK, richiesta riuscita
 201 — Created, risorsa creata con successo (si usa con POST)
 204 — No Content, riuscita ma nessun dato da restituire (si usa con DELETE)
 
 4xx — Errore del client
-
 400 — Bad Request, dati inviati non validi
 401 — Unauthorized, non sei autenticato
 403 — Forbidden, sei autenticato ma non hai i permessi
@@ -32,10 +30,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 409 — Conflict, risorsa già esistente (es. corso già pubblicato)
 
 5xx — Errore del server
-
 500 — Internal Server Error, qualcosa è andato storto nel backend
 
 */
+import jakarta.validation.Valid;
 
 @Tag(name = "corsi", description = "Api per gestione corsi nel cms")
 public interface CorsoApi {
@@ -71,7 +69,7 @@ public interface CorsoApi {
         //@ApiResponse(responseCode = "405", description = "Forbidden sei loggato ma non hai i permessi"),
     })
     @PostMapping
-    Corso createCorso(@RequestBody Corso corso);
+    Corso createCorso(@Valid @RequestBody Corso corso);
 
 
 
@@ -82,7 +80,7 @@ public interface CorsoApi {
         //@ApiResponse(responseCode = "405", description = "Forbidden sei loggato ma non hai i permessi"),
     })
     @PutMapping("/{id}")
-    Corso modifyCorso(@RequestBody Corso corso, @PathVariable Long id);
+    Corso modifyCorso(@Valid @RequestBody Corso corso, @PathVariable Long id);
 
 
 
@@ -93,7 +91,7 @@ public interface CorsoApi {
         //@ApiResponse(responseCode = "405", description = "Forbidden sei loggato ma non hai i permessi"),
     })
     @DeleteMapping("/{id}")
-    void deleteCorso( @PathVariable Long id);
+    void deleteCorso(@PathVariable Long id);
 
 
 

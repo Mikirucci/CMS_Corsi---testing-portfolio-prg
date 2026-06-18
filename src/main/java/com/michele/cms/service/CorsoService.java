@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.michele.cms.exception.CorsoAlreadyPub;
+import com.michele.cms.exception.CorsoNotFoundByName;
 import com.michele.cms.exception.CorsoNotFoundException;
 import com.michele.cms.model.Corso;
 import com.michele.cms.model.StatoCorso;
@@ -52,9 +53,7 @@ public Corso modifyCorso(Long id, Corso corso){
     Corso corsoEsistente = getOne(id);
     log.info("corso: {}", corsoEsistente);
 
-    if(corso.getNome() != null){
     corsoEsistente.setNome(corso.getNome());
-    }
     corsoEsistente.setDescrizione(corso.getDescrizione());
     corsoEsistente.setPrezzo(corso.getPrezzo());
 
@@ -84,6 +83,9 @@ public Corso publishCorso(long id){
 
 public List<Corso> searchName(String nome){
     List<Corso> corsoDaCercare = corsoRepository.findByNomeContainingIgnoreCase(nome);
+    if(corsoDaCercare.isEmpty()){
+        throw new CorsoNotFoundByName(nome);
+    }
     return corsoDaCercare;
 }
 

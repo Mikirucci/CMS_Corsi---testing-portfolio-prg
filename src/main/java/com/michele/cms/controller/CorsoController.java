@@ -1,11 +1,24 @@
 package com.michele.cms.controller;
 
+/*
+HttpStatus.OK                // 200
+HttpStatus.CREATED           // 201
+HttpStatus.NO_CONTENT        // 204
+
+HttpStatus.BAD_REQUEST       // 400
+HttpStatus.UNAUTHORIZED      // 401
+HttpStatus.FORBIDDEN         // 403
+HttpStatus.NOT_FOUND         // 404
+HttpStatus.CONFLICT          // 409
+HttpStatus.INTERNAL_SERVER_ERROR // 500 generico
+*/
+
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.michele.cms.model.Corso;
 import com.michele.cms.service.CorsoService;
 
@@ -28,6 +41,7 @@ public class CorsoController implements CorsoApi {
     }
 
     @Override
+    @ResponseStatus(HttpStatus.CREATED)
     public Corso createCorso(Corso corso) {
         return corsoService.createCorso(corso);
     }
@@ -38,6 +52,7 @@ public class CorsoController implements CorsoApi {
     }
 
     @Override
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCorso(Long id) {
         corsoService.deleteCorso(id);
     }

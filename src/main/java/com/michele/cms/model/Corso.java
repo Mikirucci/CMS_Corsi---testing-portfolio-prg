@@ -29,15 +29,15 @@ public class Corso {
     private Long id;
     
     @NonNull
-    @NotBlank
+    @NotBlank(message = "nome non valido non deve essere vuoto - mes personaliz")
     private String nome;
     
     @NonNull
-    @NotBlank
+    @NotBlank(message = "la descizione non deve essere vuota - mes personaliz")
     private String descrizione;
     
     @NonNull
-    @Positive
+    @Positive(message = "il prezzo deve essere valido, positivo - mes personaliz")
     private Double prezzo;
     
     @Enumerated(EnumType.STRING) //dice di salvarlo nella colonna con i valori in string e non 0 e 1 
