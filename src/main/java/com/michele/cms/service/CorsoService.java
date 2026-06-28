@@ -73,12 +73,15 @@ public void deleteCorso(Long id){
 public Corso publishCorso(long id){
     Corso corsoDaPubblicare = getOne(id);
     
-    if(!corsoDaPubblicare.getStato().equals(StatoCorso.PUBBLICATO) ){
+    if(corsoDaPubblicare.getStato().equals(StatoCorso.PUBBLICATO) ){
+        corsoDaPubblicare.setStato(StatoCorso.BOZZA);
+    }else {
         corsoDaPubblicare.setStato(StatoCorso.PUBBLICATO);
+    }
         log.info("corso PUBBLICATO: {}", corsoDaPubblicare);
         return corsoRepository.save(corsoDaPubblicare);
-    }
-    throw new CorsoAlreadyPub(id);  // scrivere eccezione
+    
+      // scrivere eccezione
 }
 
 public List<Corso> searchName(String nome){
