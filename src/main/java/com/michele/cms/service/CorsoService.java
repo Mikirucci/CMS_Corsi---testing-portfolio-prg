@@ -2,24 +2,24 @@ package com.michele.cms.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.michele.cms.exception.CorsoAlreadyPub;
 import com.michele.cms.exception.CorsoNotFoundByName;
 import com.michele.cms.exception.CorsoNotFoundException;
 import com.michele.cms.model.Corso;
 import com.michele.cms.model.StatoCorso;
 import com.michele.cms.repository.CorsoRepository;
-
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CorsoService {
-    @Autowired
-    private CorsoRepository corsoRepository;
+    
+    private final CorsoRepository corsoRepository;
 
 //restituisce tutti i corsi (List)
 public List<Corso> getAll(){
